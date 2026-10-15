@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>할 일 목록</title>
+        <style>
+            *{ box-sizing: border-box;}
+            body { font-family: sans-serif; max-width: 400px; margin: 40px auto;}
+            .input-row {display:flex; gap:8px; }
+            .input-row input {flex: 1; padding: 8px ;}
+            li{ display: flex; justify-content: space-between; align-items: center; padding: 8px 0;}
+            li.done span {text-decoration: line-through; color: #999;}
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>할 일 목록</h1>
+            <div class="input-row"><input id="todo-input"
+                type="text" placeholder="할 일을 입력하세요">
+            <button id="add-btn">추가</button>
+            </div>
+            <ul id="todo-list"></ul>
+        </main>
+
+        <script>
+            const btn = document.querySelector("#add-btn");
+            const input = document.querySelector("#todo-input");
+            const list = document.querySelector("#todo-list");
+
+            btn.addEventListener("click",()=>{
+                const text = input.value.trim();
+
+                if(text === "") {
+                    return;
+                }
+                
+                const li = document.createElement("li");
+                li.textContent = text;
+
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "삭제";
+                delBtn.addEventListener("click",()=>{
+                    li.remove();
+                })
+
+                li.appendChild(delBtn);
+                list.appendChild(li);
+                input.value = "";
+            });
+        </script>
+    </body>
+</html>
